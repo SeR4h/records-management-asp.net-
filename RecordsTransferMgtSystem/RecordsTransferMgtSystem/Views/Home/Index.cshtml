@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+
+    
+   
+    <hr />
+
+@using (Html.BeginForm("", "", FormMethod.Post))
+{
+    <h3>Registration Form</h3>
+        <div class="form-group">
+        <label class="control-label col-sm-2" for="firstname">First Name:</label>
+        <div>
+            <input required type="text" class="form-control" name="firstname" placeholder="Enter firstname"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="lastname">Last Name:</label>
+        <div>
+            <input required type="text" class="form-control" name="lastname" placeholder="Enter lastname"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="emailaddress">Email Address:</label>
+        <div>
+            <input required type="email" class="form-control" name="emailaddress" placeholder="Enter emailaddress"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="username">Choose UserName:</label>
+        <div>
+            <input required type="text" class="form-control" name="username" placeholder="Enter username"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="password1">Choose password:</label>
+        <div>
+            <input required type="password" class="form-control" id="password1" placeholder="Enter new password" oninput="validatePassword();"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="password2">Confrm password:</label>
+        <div>
+            <input type="password" required class="form-control" id="password2" name="password2" placeholder="Enter password" oninput="validatePassword();" onsubmit="valid();"/>
+        </div>
+    </div>
+    <script language='javascript' type='text/javascript'>
+        const password1 = document.getElementById('password1');
+        const password2 = document.getElementById('password2');
+               function validatePassword() {
+          
+
+            if (password1.value === password2.value) {
+                password2.setCustomValidity('');
+              
+            } else {
+                password2.setCustomValidity('Passwords must match');
+                
+            }            
+            console.log('password2 customError ', document.getElementById('password2').validity.customError);
+            console.log('password2 validationMessage ', document.getElementById('password2').validationMessage);
+               }                                
+               function valid() {
+                   if (password1.value != password2.value) {
+                       password2.style.borderColor = 'red';
+                   }
+                   else {
+                       password2.style.borderColor = 'lightblue';
+                       alert('Passwords dont match');
+                   }
+               }
+    </script>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="jobtitle">Job Title:</label>
+        <div>
+            <select class="form-control" name="jobtitle">
+                <option value="RecordsOfficer">RecordsOfficer</option>
+                <option value="StationManager">StationManager</option>
+                <option value="MainRegistry">MainRegistry</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-primary" value="Register">
+        </div>
+    </div>
+
+}
+

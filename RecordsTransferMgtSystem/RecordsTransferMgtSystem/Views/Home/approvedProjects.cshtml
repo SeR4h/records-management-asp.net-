@@ -1,0 +1,62 @@
+﻿@model IEnumerable<RecordsTransferMgtSystem.Models.FileTransfer>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.projectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.directorate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.station)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateOfTransfer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.boxNumber)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.projectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.directorate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.department)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.station)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateOfTransfer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.boxNumber)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.ActionLink("Back", "Records") |
+            @Html.ActionLink("View Files", "viewProjFiles", new { id = item.projectID }) 
+        </td>
+    </tr>
+}
+
+</table>

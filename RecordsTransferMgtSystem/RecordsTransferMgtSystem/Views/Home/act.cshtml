@@ -1,0 +1,83 @@
+﻿@model IEnumerable<RecordsTransferMgtSystem.Models.Userlog>
+
+
+@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script type="text/javascript">
+
+
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("logOut", "Home", FormMethod.Post))
+    {
+        <table class="table-striped table-bordered table">
+            <tr>
+                <th >
+                    @Html.DisplayNameFor(model => model.Firstname)
+                </th>
+                <th >
+                    @Html.DisplayNameFor(model => model.Lastname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th >
+                    @Html.DisplayNameFor(model => model.EmailAddress)
+                </th>
+                <th >
+                    @Html.DisplayNameFor(model => model.role)
+                </th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                   
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Firstname)
+                    </td>
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.role)
+                    </td>
+                    <td>
+                     
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) <span class="glyphicon glyphicon-edit"> </span> |
+
+                        @Html.ActionLink("Delete", "DeleteUsers", new { id = item.id }) <span class="glyphicon glyphicon-trash"></span>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-primary" value="LogOut">
+            </div>
+        </div>
+    }
+
+</body>
+</html>

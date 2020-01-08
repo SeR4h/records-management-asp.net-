@@ -1,0 +1,301 @@
+﻿@model RecordsTransferMgtSystem.Models.FileTransfer
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@{
+    ViewBag.Title = "FileTransferdetails";
+}
+<head>
+    <title></title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+
+        var filelist = [];
+      
+
+    function productAddToTable() {
+        if ($("#productTable tbody").length == 0) {
+            $("#productTable").append("<tbody></tbody>");
+        }
+        // Append file to the array
+        filelist.push({
+            
+                "projectID": $("#projectID").val(),
+                "fileTitle": $("#fileTitle").val(),
+                "company": $("#company").val(),
+                "SrNo": $("#SrNo").val(),
+                "ReferenceNo": $("#ReferenceNo").val(),
+                "numberOfCopies": $("#numberOfCopies").val()
+          
+        })
+    
+        /*var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+        var jsVariable = serializer.Serialize(fileitem);
+        ViewBag.Data = new HtmlString(jsVariable);*/
+        
+       
+    
+        // Append file to the array
+        $("#productTable tbody").append(
+            "<tr>" +
+            "<td>" + $("#projectID").val() + "</td>" +
+              "<td>" + $("#fileTitle").val() + "</td>" +
+              "<td>" + $("#company").val() + "</td>" +
+              "<td>" + $("#SrNo").val() + "</td>" +
+              "<td>" + $("#ReferenceNo").val() + "</td>" +
+              "<td>" + $("#numberOfCopies").val() + "</td>" +
+              "<td>" +
+                  "<button type='button' " +
+                "onclick='productDelete(this);' " +
+                "value ='Delete'" +
+                  "class='btn btn-default'>" +
+                  "<span class='glyphicon glyphicon-trash' />" +
+        "</button>" +
+      "</td>" +
+            "</tr>"
+            );
+
+
+    }
+
+    function sendfiles() {
+        console.log(JSON.stringify(filelist));      
+
+        try{
+            $.ajax({
+                url: "/Home/AddfileTransfer",
+                type: "POST",               
+                dataType: "JSON",
+               
+                data: {"json":JSON.stringify(filelist)},
+                success: function (data) {
+                    alert("Success");
+                }
+            });
+        }
+        catch(Exception){
+            console.log(ExceptionInformation);
+        }
+       /* console.log(filelistjson);
+        $.post("/Home/AddfileTransfer", filelistjson,
+       function (data, status) {
+           alert("Data: " + data + "\nStatus: " + status);
+       });*/
+    }
+
+
+
+    function productDelete(ctl) {
+        $(ctl).parents("tr").remove();
+    }
+     
+ 
+    </script>
+
+</head>
+
+<h2>UpdatefileTransfer</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.projectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.directorate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.station)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateOfTransfer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.boxNumber)
+        </th>
+        <th>@Html.DisplayNameFor(model => model.status)</th>
+        <th>Action</th>
+    </tr>
+
+
+    <tr>
+        <td>
+            @Model.projectName
+        </td>
+        <td>
+            @Model.directorate
+        </td>
+        <td>
+            @Model.department
+        </td>
+        <td>
+            @Model.station
+        </td>
+        <td>
+            @Model.dateOfTransfer.ToShortDateString() 
+        </td>
+        <td>
+            @Model.boxNumber
+        </td>
+        <td>
+            @Model.status
+        </td>
+        <td>  
+            @Html.ActionLink("Delete", "DeleteProject", new { id = @Model.projectID })<span class="glyphicon glyphicon-trash"></span> |
+            <a href="#myModal" data-toggle="modal" data-target="#myModal">Edit</a> <span class="glyphicon glyphicon-pencil"></span>
+        </td>
+    </tr>
+
+
+</table>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Added Files</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <table id="productTable"
+                       class="table table-bordered
+                     table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Project Id</th>
+                            <th>File Title</th>
+                            <th>Company Name</th>
+                            <th>Sr Number</th>
+                            <th>Reference No</th>
+                            <th>Copies</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <h4>FILE DETAILS</h4>
+  <div id="01">
+       
+</div>
+    
+
+    <table class="table table-hover small-text" id="tc">
+        <tr class="tr-header" id="1h">
+            <th></th>
+            <th>File Title</th>
+            <th>Company Name</th>
+            <th>Sr Number</th>
+            <th>Reference No</th>
+            <th>Copies</th>
+            <th>ADD</th>
+          
+        </tr>
+
+        <tr id="4">            
+           <td> <input type="hidden" value=@TempData["msg"] name="projectID" id="projectID" /></td>
+           
+                    <td><input required type="text" class="form-control" name="fileTitle" id="fileTitle" placeholder="Enter File Title" /></td>
+                    <td><input required type="text" class="form-control" name="company" id="company" placeholder="Enter Company Name" /></td>
+                    <td><input required type="text" class="form-control" name="SrNo" id="SrNo" placeholder="Enter Sr No" /></td>
+                    <td><input required type="text" class="form-control" name="ReferenceNo" id="ReferenceNo" placeholder="Enter reference Number" /></td>
+                    <td><input required type="number" form-control" name="numberOfCopies" id="numberOfCopies" placeholder="Enter number Of Copies" /></td>
+                 <td><button type="button" class="btn btn-primary" onclick="productAddToTable();"><span class="glyphicon glyphicon-plus"></span></button></td>
+</tr>
+
+                </table>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-primary" onclick="sendfiles()" value="Send Transfer Request" >
+            </div>
+        </div>
+ 
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Project Details</h4>
+            </div>
+            <div class="modal-body">
+           
+                @using (Html.BeginForm("EditProject", "Home", FormMethod.Post))
+                {
+                    <input type="hidden" name="projectID" value="@Model.projectID" />
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="projectname">Project Name:</label>
+                        <div>
+                            <input required type="text" class="form-control" name="projectName" value="@Model.projectName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="directorate">Directorate:</label>
+                        <div>
+                            <select class="form-control" name="directorate" style="width:auto">
+                                <option value="Officer Of The Executive Director">Officer Of The Executive Director</option>
+                                <option value="Network Planning And Engineering">Network Planning And Engineering</option>
+                                <option value="Roads And Bridges">Roads And Bridges</option>
+                                <option value="Road maintenence">Road maintenence</option>
+                                <option value="Road infrastructure Protection">Road infrastructure Protection</option>
+                                <option value="Procurement">Procurement</option>
+                                <option value="Internal Audit">Internal Audit</option>
+                                <option value="Legal Services">Legal Services</option>
+                                <option value="Human Resource">Human Resource</option>
+                                <option value="Corporate Services">Corporate Services</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="department">Department:</label>
+                        <div>
+                            <input required type="text" class="form-control" name="department" value="@Model.department" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="station">Station:</label>
+                        <div>
+                            <input required type="text" class="form-control" name="station" value="@Model.station" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="transferDate">Date Of transfer:</label>
+                        <div>
+                            <input required type="date" class="form-control" value="@Model.dateOfTransfer" name="transferDate" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="boxNumber">Box Number</label>
+                        <div>
+                            <input type="text" required class="form-control" name="boxNumber" value="@Model.boxNumber" />
+                        </div>
+                    </div>
+                    <hr />
+
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" class="btn btn-primary" value="Update Project Details">
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>

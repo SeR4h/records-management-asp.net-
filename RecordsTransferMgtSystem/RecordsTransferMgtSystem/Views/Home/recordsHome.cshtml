@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div class="container">
+  ;kmllkb  <!-- Content here -->
+</div>
+@section SideBar{
+    <div>
+       
+        @using (Html.BeginForm("logOut", "Home", FormMethod.Post))
+        {
+            <input type="submit" class="btn btn-primary top-right" value="LogOut" />
+        }
+    </div>
+
+
+
+}

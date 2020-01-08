@@ -1,0 +1,81 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@{
+    ViewBag.Title = "getRecord";
+  
+}
+
+<hr />
+
+
+
+<hr />
+
+@using (Html.BeginForm("getRecorde", "Home", FormMethod.Post))
+{
+   
+    <h3>Request File Transfer!!</h3>
+   
+    <hr/>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="projectname">Project Name:</label>
+        <div>
+            <input required type="text" class="form-control" name="projectName" placeholder="Enter projectname" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="directorate">Directorate:</label>
+        <div>     
+            <select class="form-control" name="directorate" style="width:auto">
+                <option value="Officer Of The Executive Director">Officer Of The Executive Director</option>
+                <option value="Network Planning And Engineering">Network Planning And Engineering</option>
+                <option value="Roads And Bridges">Roads And Bridges</option>
+                <option value="Road maintenence">Road maintenence</option>
+                <option value="Road infrastructure Protection">Road infrastructure Protection</option>
+                <option value="Procurement">Procurement</option>
+                <option value="Internal Audit">Internal Audit</option>
+                <option value="Legal Services">Legal Services</option>
+                <option value="Human Resource">Human Resource</option>
+                <option value="Corporate Services">Corporate Services</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="department">Department:</label>
+        <div>
+            <input required type="text" class="form-control" name="department" placeholder="Enter department" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="station">Station:</label>
+        <div>
+            <input required type="text" class="form-control" name="station" placeholder="Enter station" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="transferDate">Date Of transfer:</label>
+        <div>
+            <input required type="date" class="form-control" placeholder="Enter transferDate" name="dateOfTransfer" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="boxNumber">Box Number</label>
+        <div>
+            <input type="text" required class="form-control" name="boxNumber" placeholder="Enter boxNumber"  />
+        </div>
+    </div>   
+      
+  
+ <hr/>   
+   <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">        
+            <button type="submit" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-file"></span> Add File Details
+            </button>
+        </div>
+    </div>
+
+}
+
+

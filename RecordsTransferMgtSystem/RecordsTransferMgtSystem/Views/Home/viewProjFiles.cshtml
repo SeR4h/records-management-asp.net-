@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RecordsTransferMgtSystem.Models.projectFile>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.projectID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fileTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SrNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferenceNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numberOfCopies)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.projectID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fileTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SrNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferenceNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numberOfCopies)
+        </td>
+        <td>
+            @Html.ActionLink("Back", "viewProjects") | 
+            @Html.ActionLink("Not Available", "", new { id = item.projectID })
+            
+          
+        </td>
+    </tr>
+}
+
+</table>
